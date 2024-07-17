@@ -1,0 +1,372 @@
+/* Layout */
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* Header Part */
+.header {
+  @include bg("../images/desktop/image-header.jpg", cover, center);
+  width: 100%;
+  height: 100vh;
+
+  @include res(phone) {
+    @include bg("../images/mobile/image-header.jpg", cover, bottom);
+  }
+
+  &__container {
+    max-width: 1440px;
+    @include center;
+    position: relative;
+  }
+
+  &__top {
+    @include flex(row, space-between, center);
+    height: 12rem;
+    margin-bottom: 8rem;
+    position: relative;
+  }
+
+  &__logo {
+    width: 17rem;
+    height: 3rem;
+    margin-left: 4rem;
+  }
+
+  &__heading {
+    @include font(var(--font-heading), 5.2rem, 900, var(--color-white));
+    letter-spacing: 1.1rem;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 16rem;
+
+    @include res(phone) {
+      font-size: 4.6rem;
+      margin-bottom: 9rem;
+    }
+  }
+
+  @keyframes arrowDown {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    75% {
+      transform: translateY(8rem);
+      opacity: 0.7;
+    }
+  }
+
+  &__arrow {
+    @include center;
+    animation: arrowDown 1s ease-in-out;
+    animation-iteration-count: 3;
+    animation-fill-mode: forwards;
+    cursor: pointer;
+    display: block;
+  }
+}
+
+/* Main: Boxes */
+.main {
+  @include flex(row, $wrap: wrap);
+}
+
+.box {
+  @include flex(column, center);
+  width: 50%;
+  transition: transform var(--transition-duration);
+
+  @include res(tablet) {
+    width: 100%;
+  }
+
+  &__content {
+    padding-left: 17rem;
+    padding-right: 11rem;
+
+    @include res(desktop) {
+      margin: 0;
+      padding: 0 6rem;
+    }
+
+    @include res(tablet) {
+      text-align: center;
+      margin: 5.5rem 0;
+    }
+
+    // Spacing Fix for second box
+    &--right {
+      padding-left: 12rem;
+      padding-right: 16rem;
+
+      @include res(desktop) {
+        margin: 0;
+        padding: 0 6rem;
+      }
+
+      @include res(tablet) {
+        text-align: center;
+        margin: 5.5rem 0;
+      }
+    }
+  }
+
+  &__title {
+    @extend %space-big-bottom;
+    @include font(
+      var(--font-heading),
+      3.8rem,
+      900,
+      var(--color-darkest-blue),
+      $lh: 1.2
+    );
+  }
+
+  &__text {
+    @extend %space-big-bottom;
+    color: var(--color-dark-grayish-blue);
+    font-size: calc(var(--font-size) - 0.5px);
+  }
+
+  &__link {
+    @include font(var(--font-heading), null, 900, var(--color-darkest-blue));
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    z-index: 2;
+
+    &:hover::after {
+      opacity: 1;
+    }
+
+    &--yellow::after {
+      @extend %pseudo-border;
+      background-color: var(--color-yellow);
+      transition: var(--transition-duration);
+    }
+
+    &--red::after {
+      @extend %pseudo-border;
+      background-color: var(--color-soft-red);
+      transition: var(--transition-duration);
+    }
+  }
+
+  &--white {
+    background-color: var(--color-white);
+  }
+
+  &--order {
+    order: none;
+
+    @include res(tablet) {
+      order: -1;
+    }
+  }
+
+  & > picture {
+    overflow: hidden;
+
+    & > img {
+      width: 100%;
+      transition: transform var(--transition-duration);
+
+      &:hover {
+        transform: scale(1.25);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+// Last two box for services (too many custom elements and blocks and colors variants... thanks to designer.)
+.services {
+  width: 50%;
+  position: relative;
+
+  @include res(tablet) {
+    width: 100%;
+  }
+
+  &__content {
+    position: absolute;
+    bottom: 6rem;
+    margin: 0 20rem;
+    text-align: center;
+
+    @include res(laptop) {
+      margin: 0 10rem;
+    }
+
+    @include res(tablet) {
+    }
+  }
+
+  &__title {
+    @include font(var(--font-heading), 2.6rem, $weight: 900);
+    margin-bottom: 2rem;
+  }
+  &__text {
+    font-size: 1.5rem;
+  }
+
+  &--cyan {
+    color: var(--color-dark-cyan);
+  }
+  &--blue {
+    color: var(--color-dark-blue);
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  & img {
+    width: 100%;
+  }
+}
+
+/* Testimonials */
+.testimonials {
+  margin: 16rem auto;
+  text-align: center;
+
+  @include res(phone) {
+    margin: 8rem auto;
+  }
+
+  &__title {
+    @include font(var(--font-heading), 1.8rem, $weight: 700);
+    color: var(--color-grayish-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
+    margin-bottom: 7rem;
+  }
+
+  &__block {
+    @include flex(row, center);
+    margin: 0 17rem;
+
+    @include res(laptop) {
+      margin: 0 12rem;
+    }
+
+    @include res(tablet) {
+      margin: 0 8rem;
+      @include flex(column);
+    }
+  }
+
+  &__item:not(:last-of-type) {
+    margin-right: 4rem;
+
+    @include res(tablet) {
+      margin-right: 0;
+      margin-bottom: 3rem;
+    }
+  }
+
+  &__avatar {
+    @include center;
+    width: 70px;
+    height: auto;
+    border-radius: 50px;
+    margin-bottom: 6rem;
+
+    @include res(tablet) {
+      margin-bottom: 3rem;
+    }
+  }
+  &__text {
+    font-size: 1.75rem;
+    color: var(--color-darkest-grayish-blue);
+    margin-bottom: 8rem;
+
+    @include res(tablet) {
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  &__author {
+    @include font(var(--font-heading), 1.7rem, 900, var(--color-darkest-blue));
+
+    & span {
+      @include font(var(--font-body), 1.4rem, null, var(--color-grayish-blue));
+      display: block;
+      padding-top: 1.5rem;
+      @include res(tablet) {
+        padding-top: 0.5rem;
+      }
+    }
+  }
+}
+
+/* Gallery */
+.gallery {
+  @include flex(row);
+
+  @include res(tablet) {
+    flex-wrap: wrap;
+  }
+
+  & picture {
+    @include res(tablet) {
+      width: 50%;
+    }
+  }
+}
+
+/* Footer Section */
+.footer {
+  width: 100%;
+  @include flex(column, center, center);
+  text-align: center;
+  background-color: var(--color-dark-mod-cyan-bg);
+  color: var(--color-dark-mod-cyan);
+
+  &__logo {
+    width: 17rem;
+    height: 3rem;
+    margin-top: 7rem;
+    margin-bottom: 3rem;
+  }
+
+  &__nav {
+    @include flex(row);
+    margin-bottom: 8rem;
+  }
+  &__nav-items {
+    transition: var(--transition-duration);
+
+    &:not(:last-of-type) {
+      margin-right: 5rem;
+    }
+
+    &:hover {
+      color: var(--color-white);
+      cursor: pointer;
+    }
+  }
+
+  &__social {
+    // @include flex(row, space-between);
+    margin-bottom: 7rem;
+    // width: 150px;
+
+    & a:not(:last-child) {
+      margin-right: 2.5rem;
+    }
+
+    & svg path {
+      transition: var(--transition-duration);
+    }
+    & svg:hover path {
+      cursor: pointer;
+      fill: var(--color-white);
+    }
+  }
+}
