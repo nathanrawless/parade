@@ -1,0 +1,8 @@
+*.map
+*.json
+css/main.css
+.DS_Store
+.prettierignore
+*.txt
+style-guide.md
+*.js
